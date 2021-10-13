@@ -5,6 +5,8 @@ This means the cluster will remain available for both reads and writes even if t
 
 [YugabyteDB Docs](https://docs.yugabyte.com/latest/)
 
+There is another repository with a 3 nodes cluster solution [here](https://github.com/wagnerjfr/yugabytedb-docker-sample).
+
 ### 1. Install YugabyteDB
 Pull the YugabyteDB Docker image.
 ```
@@ -22,7 +24,7 @@ docker network create universe
 ```
 
 ### 3. Create the YB-Masters
-We are going to use "yb-master" binary and its flags to configure the YB-Master server in 5 containers [[ref.](https://docs.yugabyte.com/latest/reference/configuration/yb-master/)].
+We are going to use **"yb-master"** binary and its flags to configure the YB-Master server in 5 containers [[ref.](https://docs.yugabyte.com/latest/reference/configuration/yb-master/)].
 ```
 for N in 1 2 3 4 5
 do docker run -d --name yb-master-n$N --net=universe --hostname=yb-master-n$N -p700$N:7000 \
@@ -35,7 +37,7 @@ done
 ```
 
 ### 4. Create the YB-TServers
-We are going to use "yb-master" binary and its flags to configure the YB-TServer server in 5 containers [[ref.](https://docs.yugabyte.com/latest/reference/configuration/yb-tserver/)].
+We are going to use **"yb-tserver"** binary and its flags to configure the YB-TServer server in 5 containers [[ref.](https://docs.yugabyte.com/latest/reference/configuration/yb-tserver/)].
 ```
 for N in 1 2 3 4 5
 do docker run -d --name yb-tserver-n$N --net=universe --hostname=yb-tserver-n$N -p900$N:9000 -p543$N:5433 -p904$N:9042 \
